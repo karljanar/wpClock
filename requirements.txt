@@ -1,0 +1,2 @@
+Pillow==9.1.0
+python_crontab==2.6.0

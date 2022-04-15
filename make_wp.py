@@ -1,32 +1,20 @@
 import os
 from PIL import Image, ImageDraw, ImageFont
 from datetime import datetime
-import subprocess
-from crontab import CronTab
-from screeninfo import get_monitors
 
-
+imgWidth = 2160
+imgHeight = 1440
 base_dir = os.path.dirname(__file__)
-base_image_path = os.path.join(base_dir, "src.png")
-result_image_path = os.path.join(base_dir, "out.png")
-font = ImageFont.truetype("/usr/share/fonts/truetype/ubuntu/Ubuntu-B.ttf", 200)
+src_img_path = os.path.join(base_dir, "img/src.png")
+out_img_path = os.path.join(base_dir, "img/out.png")
+
+font = ImageFont.truetype("NotoSansDisplay-BoldItalic.ttf", 90)
 time = datetime.now().strftime("%H:%M")
 
-im = Image.open(base_image_path)
+im = Image.open(src_img_path)
 draw = ImageDraw.Draw(im)
-draw.text((2877, 2030), time, font=font, fill="#E8A746")
+w, h = draw.textsize(time, font=font)
+draw.text(((imgWidth-w)/2,(imgHeight-h)/2), time, font=font, fill="#E8A746")
 
 
-
-
-im.save(result_image_path, quality=95)
-
-uri = "'file://%s'" % result_image_path
-try:
-    SCHEMA = "org.gnome.desktop.background"
-    KEY = "picture-uri"
-    gsettings = Gio.Settings.new(SCHEMA)
-    gsettings.set_string(KEY, uri)
-except:
-    args = ["gsettings", "set", "org.gnome.desktop.background", "picture-uri", uri]
-    subprocess.Popen(args)
+im.save(out_img_path, quality=95)
