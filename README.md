@@ -19,5 +19,6 @@ Python: 3.x
 $ git clone https://github.com/karljanar/wpClock.git
 $ cd wpClock/
 $ pip install -r requirements.txt
+$ chmod +x setWpReboot.sh
 $ python cronJob.py
 ```
