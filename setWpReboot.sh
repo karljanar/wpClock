@@ -6,4 +6,5 @@ BASEDIR=$(pwd)
 IMG="/img/out.png"
 
 PIC=$BASEDIR$IMG
+gsettings set org.gnome.desktop.background picture-uri-dark "file://$PIC"
 gsettings set org.gnome.desktop.background picture-uri "file://$PIC"
